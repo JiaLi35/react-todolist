@@ -5,8 +5,8 @@ function TodoList(props) {
   return (
     <ul className="list-group">
       {list.map((item, index) => {
-        const { label, isCompleted } = item;
-        return <TodoItem name={label} isCompleted={isCompleted} />;
+        const { id, label, isCompleted } = item;
+        return <TodoItem key={id} name={label} isCompleted={isCompleted} />;
       })}
     </ul>
   );
