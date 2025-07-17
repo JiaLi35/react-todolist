@@ -29,11 +29,35 @@ function App() {
       >
         <div className="card-body">
           <h3 className="card-title mb-3">My Todo List</h3>
-          <TodoList list={list} />
+          <TodoList
+            list={list}
+            onDelete={(id) => {
+              const updatedList = list.filter((item) => {
+                if (item.id !== id) {
+                  return true; // keep
+                } else {
+                  return false; // throw away
+                }
+              });
+              setList(updatedList);
+            }}
+            onMarkDone={(id, isCompleted) => {
+              setList(
+                list.map((item) => {
+                  if (item.id === id) {
+                    if (item.isCompleted === true) {
+                      item.isCompleted = false;
+                    } else {
+                      item.isCompleted = true;
+                    } // update the value
+                  }
+                  return item;
+                })
+              );
+            }}
+          />
           <div className="mt-4">
             <AddTodoForm
-              list={list}
-              setList={setList}
               onAddNew={(newValue) => {
                 setList([
                   ...list,
